@@ -13,7 +13,7 @@
 <% end %>
 
 <p>Favorite style: <%= @user.favorite_style %></p>
-<p>Favorite brewery: <%= @user.favorite_brewery.name %></p>
+<p>Favorite brewery: <%= @user.favorite_brewery.name unless @user.favorite_brewery == nil %></p>
 
 <h3>Ratings</h3>
 

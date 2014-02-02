@@ -12,6 +12,9 @@
   <p>Member of <% @user.memberships.each do |membership| %><%= link_to membership.beer_club.name, membership.beer_club %> <% end %></p>
 <% end %>
 
+<p>Favorite style: <%= @user.favorite_style %></p>
+<p>Favorite brewery: <%= @user.favorite_brewery.name %></p>
+
 <h3>Ratings</h3>
 
 <ul>

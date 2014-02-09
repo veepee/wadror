@@ -20,7 +20,7 @@
         <td><%= beer_club.city %></td>
         <td><%= link_to 'Show', beer_club %></td>
         <td><%= link_to 'Edit', edit_beer_club_path(beer_club) if current_user %></td>
-        <td><%= link_to 'Destroy', beer_club, method: :delete, data: { confirm: 'Are you sure?' } if current_user %></td>
+        <td><%= link_to 'Destroy', beer_club, method: :delete, data: { confirm: 'Are you sure?' } if current_user and current_user.admin %></td>
       </tr>
     <% end %>
   </tbody>

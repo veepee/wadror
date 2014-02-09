@@ -1,12 +1,16 @@
 require 'spec_helper'
 
+include OwnTestHelper
+
 describe "Beer" do
 
   before :each do
+    FactoryGirl.create :user
     FactoryGirl.create(:brewery, name:"Test", year: 1991)
   end
 
   it "gets succesfully submitted if it has a valid name" do
+    sign_in username:"Pekka", password:"Foobar1"
     visit new_beer_path
     fill_in('beer_name', with:'Test beer')
     
@@ -17,6 +21,7 @@ describe "Beer" do
   end
 
   it "cannot be submitted if it has an invalid name" do
+    sign_in username:"Pekka", password:"Foobar1"
     visit new_beer_path
   
     number_of_beers = Beer.count

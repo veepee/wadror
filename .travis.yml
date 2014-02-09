@@ -1,0 +1,16 @@
+language: ruby
+rvm:
+- 2.0.0
+script:
+- bundle exec rake db:migrate --trace
+- RAILS_ENV=test bundle exec rake db:migrate --trace
+- bundle exec rake db:test:prepare
+- bundle exec rspec -fd spec/
+deploy:
+  provider: heroku
+  api_key:
+    secure: mjqPWpzkPOuzRkKviTm4fVB1VgNy+72zqWNPBogSlpFynRvjMuPqERzOyCJZX09ov5IIt9OlGo5ZRjOBrzM6kiwi9ASzXOPS0hc3nDeuQKKfYk2oBBqYXqMJqL5chxdd1LtoSW8e7rOKR+BKtSkBkMsWTjze/NttjqfkzYpu+lo=
+  app: protected-waters-1910
+  on:
+    repo: veepee/wadror
+  run: "rake db:migrate"

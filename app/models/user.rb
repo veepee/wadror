@@ -62,4 +62,8 @@ class User < ActiveRecord::Base
   def get_highest_average(average_hash)
     average_hash.max_by { |k, v| v}[0]
   end
+
+  def belongs_to_club(club)
+    beer_clubs.include? club
+  end
 end

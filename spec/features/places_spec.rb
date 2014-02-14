@@ -4,11 +4,11 @@ describe "Places" do
 
   before :each do
     BeermappingApi.stub(:places_in).with("kumpula").and_return(
-        [ Place.new(:name => "Oljenkorsi") ]
+        [ Place.new(:id => 1, :name => "Oljenkorsi") ]
     )
     BeermappingApi.stub(:places_in).with("kallio").and_return(
-        [ Place.new(:name => "Pub Heinähattu"),
-          Place.new(:name => "Las Vegas") ]
+        [ Place.new(:id => 2, :name => "Pub Heinähattu"),
+          Place.new(:id => 3, :name => "Las Vegas") ]
     )
     BeermappingApi.stub(:places_in).with("asdf").and_return(
         []

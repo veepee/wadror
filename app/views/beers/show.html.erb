@@ -7,7 +7,7 @@
 
 <p>
   <strong>Style:</strong>
-  <%= @beer.style %>
+  <%= @beer.style.name unless @beer.style.nil? %>
 </p>
 
 <p>

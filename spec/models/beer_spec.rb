@@ -3,7 +3,8 @@ require 'spec_helper'
 describe Beer do
   describe "is created and saved succesfully" do
     it "if it has name and style set" do
-      beer = Beer.create name:"Test", style:"Lager"
+      style = Style.create name:"Lager"
+      beer = Beer.create name:"Test", style:style
 
       expect(beer).to be_valid
       expect(Beer.count).to eq(1)
@@ -11,7 +12,8 @@ describe Beer do
   end
   describe "is neither created nor saved" do
     it "if it has an invalid name" do
-      beer = Beer.create style:"Lager"
+      style = Style.create name:"Lager"
+      beer = Beer.create style:style
 
       expect(beer).not_to be_valid
       expect(Beer.count).to eq(0)

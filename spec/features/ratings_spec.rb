@@ -32,15 +32,6 @@ describe "Rating" do
       create_test_ratings
     end
 
-    it "are shown on the ratings page" do
-      visit ratings_path
-
-      expect(page).to have_content "Number of ratings: #{Rating.count}"
-      expect(page).to have_content "#{beer1.name} 12"
-      expect(page).to have_content "#{beer2.name} 16"
-      expect(page).to have_content "#{beer1.name} 21"
-    end
-
     it "are shown on the user's profile page" do
       visit user_path(user)
 

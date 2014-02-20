@@ -1,5 +1,7 @@
 <p id="notice"><%= notice %></p>
 
+<% cache 'brewerylist', skip_digest: true do %>
+
 <h1>Breweries</h1>
 
 <h2>Active</h2>
@@ -15,6 +17,8 @@
 <%= render 'list', breweries: @retired_breweries %>
 
 <br>
+
+<% end %>
 
 <%= link_to 'New brewery', new_brewery_path, class:"btn btn-primary"  %>
 

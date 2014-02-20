@@ -1,5 +1,7 @@
 <p id="notice"><%= notice %></p>
 
+<% cache @brewery, skip_digest: true do %>
+
 <h2><%= @brewery.name %>
   <% if not @brewery.active  %>
       <span class="label label-info">retired</span>
@@ -23,6 +25,8 @@
     <p>beers of the brewery have not yet been rated! </p>
 <% else %>
     <p>Has <%= pluralize(@brewery.ratings.count,'rating') %>, average <%= round(@brewery.average_rating) %> </p>
+<% end %>
+
 <% end %>
 
 <% if current_user %>

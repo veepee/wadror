@@ -12,4 +12,8 @@ class Beer < ActiveRecord::Base
   def to_s
     "#{name} (#{brewery.name})"
   end
+
+  def self.top(n)
+    Beer.all.sort_by { |b| b.average_rating }.reverse.take(n)
+  end
 end

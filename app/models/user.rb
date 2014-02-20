@@ -21,49 +21,40 @@ class User < ActiveRecord::Base
     ratings.order(score: :desc).limit(1).first.beer
   end
 
-  def favorite_style
-    return nil if ratings.empty?
-
-    styles, styles_counts = {}, {}
-    self.ratings.each do |rating|
-      if styles[rating.beer.style] == nil
-        styles[rating.beer.style], styles_counts[rating.beer.style] = 0, 0
-      end
-      styles[rating.beer.style] = styles[rating.beer.style] + rating.score
-      styles_counts[rating.beer.style] = styles_counts[rating.beer.style] + 1
-    end
-
-    get_highest_average(get_average_hash(styles, styles_counts))
-  end
-
-  def favorite_brewery
-    return nil if ratings.empty?
-  
-    breweries, breweries_counts = {}, {}
-    self.ratings.each do |rating|
-      if breweries[rating.beer.brewery] == nil
-        breweries[rating.beer.brewery], breweries_counts[rating.beer.brewery] = 0, 0
-      end
-      breweries[rating.beer.brewery] = breweries[rating.beer.brewery] + rating.score
-      breweries_counts[rating.beer.brewery] = breweries_counts[rating.beer.brewery] + 1
-    end
-
-    get_highest_average(get_average_hash(breweries, breweries_counts))
-  end
-
-  def get_average_hash(sum_hash, count_hash)
-    average_hash = {}
-    sum_hash.each do |key, val|
-      average_hash[key] = (count_hash[key] > 0) ? sum_hash[key] / count_hash[key] : 0
-    end
-    average_hash
-  end
-
-  def get_highest_average(average_hash)
-    average_hash.max_by { |k, v| v}[0]
-  end
-
   def belongs_to_club(club)
     beer_clubs.include? club
   end
+
+  def favorite_brewery
+    favorite :brewery
+  end
+
+  def favorite_style
+    favorite :style
+  end
+
+  def self.most_active(n)
+    User.all.sort_by { |user| user.ratings.count }.reverse.take(n)    
+  end
+
+  private
+
+  def favorite(category)
+    return nil if ratings.empty?
+    rating_pairs = rated(category).inject([]) do |pairs, item|
+      pairs << [item, rating_average(category, item)]
+    end
+    rating_pairs.sort_by { |s| s.last }.last.first
+  end
+
+  def rated(category)
+    ratings.map{ |r| r.beer.send(category) }.uniq
+  end
+
+  def rating_average(category, item)
+    ratings_of_item = ratings.select{ |r|r.beer.send(category)==item }
+    return 0 if ratings_of_item.empty?
+    ratings_of_item.inject(0.0){ |sum ,r| sum+r.score } / ratings_of_item.count
+  end
+
 end

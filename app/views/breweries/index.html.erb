@@ -3,8 +3,8 @@
 <table>
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Year</th>
+      <th><%= link_to 'Name', breweries_path(order:"name") %></th>
+      <th><%= link_to 'Year', breweries_path(order:"year") %></th>
       <th></th>
       <th></th>
       <th></th>

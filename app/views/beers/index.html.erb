@@ -3,9 +3,9 @@
 <table>
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Style</th>
-      <th>Brewery</th>
+      <th><%= link_to 'Name', beers_path(order:"name") %></th>
+      <th><%= link_to 'Style', beers_path(order:"style") %></th>
+      <th><%= link_to 'Brewery', beers_path(order:"brewery") %></th>
       <th></th>
       <th></th>
       <th></th>

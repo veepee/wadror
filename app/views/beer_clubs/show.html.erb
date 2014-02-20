@@ -23,7 +23,7 @@
   <% unless current_user.belongs_to_club(@beer_club) %>
     <%= form_for(@membership) do |f| %>
       <%= f.hidden_field :beer_club_id %>
-      <%= f.submit value:"Join the club" %>
+      <%= f.submit value:"Join the club", class:"btn btn-primary" %>
     <% end %>
   <% end %>
 

@@ -1,6 +1,6 @@
 <h1>Listing breweries</h1>
 
-<table>
+<table class="table table-hover">
   <thead>
     <tr>
       <th><%= link_to 'Name', breweries_path(order:"name") %></th>
@@ -27,5 +27,4 @@
 
 <br>
 
-<%= link_to 'New Brewery', new_brewery_path if current_user %>
-<%= link_to 'List of beers', beers_path %>
+<%= link_to 'New brewery', new_brewery_path, class: "btn btn-primary" if current_user %>
